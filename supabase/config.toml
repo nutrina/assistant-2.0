@@ -1,0 +1,56 @@
+# Local Supabase stack for the Personal Retro Assistant. `supabase start` reads this file.
+# This config is for local development and tests only. Its ports sit in 5632x so this stack can
+# run beside another local Supabase project on the default 5432x ports.
+project_id = "assistant-2.0"
+
+[api]
+enabled = true
+port = 56321
+schemas = ["public", "graphql_public"]
+extra_search_path = ["public", "extensions"]
+max_rows = 1000
+
+[db]
+port = 56322
+shadow_port = 56320
+major_version = 17
+
+[db.seed]
+enabled = false
+
+[auth]
+enabled = true
+site_url = "http://127.0.0.1:8787"
+additional_redirect_urls = []
+jwt_expiry = 3600
+enable_refresh_token_rotation = true
+refresh_token_reuse_interval = 10
+enable_signup = true
+enable_anonymous_sign_ins = false
+
+[auth.email]
+enable_signup = true
+# Off locally so a sign-up returns a session. A hosted project can keep confirmation on.
+enable_confirmations = false
+double_confirm_changes = false
+
+[studio]
+enabled = true
+port = 56323
+
+[local_smtp]
+enabled = true
+port = 56324
+
+# Not used by this service.
+[realtime]
+enabled = false
+
+[storage]
+enabled = false
+
+[edge_runtime]
+enabled = false
+
+[analytics]
+enabled = false
