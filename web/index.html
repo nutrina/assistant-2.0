@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f6f1e9">
+  <title>Retro</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/app.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <h1>Retro</h1>
+    <div class="who" id="who" hidden>
+      <span id="who-email"></span>
+      <button type="button" class="link" id="sign-out">Sign out</button>
+    </div>
+  </header>
+
+  <p class="flash" id="flash" role="status" aria-live="polite" hidden></p>
+
+  <main>
+    <section class="card" id="sign-in-card">
+      <h2>Sign in</h2>
+      <form id="sign-in-form">
+        <label>Email <input type="email" name="email" autocomplete="username" required></label>
+        <label>Password <input type="password" name="password" autocomplete="current-password" required></label>
+        <div class="row">
+          <button type="submit">Sign in</button>
+          <button type="button" class="secondary" id="sign-up">Create account</button>
+        </div>
+      </form>
+    </section>
+
+    <div id="app" hidden>
+      <div class="phone">
+        <section class="card" id="log-card">
+          <h2>Quick log</h2>
+          <form id="log-form" class="log-form">
+            <select name="activityTypeId" id="log-type" aria-label="Activity"></select>
+            <input type="number" name="value" id="log-value" inputmode="decimal" step="any" min="0" placeholder="0" aria-label="Value">
+            <button type="submit">Log</button>
+          </form>
+          <h3>Today <span class="muted" id="today-date"></span></h3>
+          <ul class="today" id="today-list"></ul>
+          <p class="muted empty" id="today-empty">Nothing logged yet today.</p>
+        </section>
+
+        <section class="card" id="type-card">
+          <h2>Add an activity</h2>
+          <form id="type-form" class="inline-form">
+            <input name="name" placeholder="push-ups" aria-label="Activity name" required>
+            <input name="unit" placeholder="reps" aria-label="Unit">
+            <button type="submit">Add</button>
+          </form>
+        </section>
+      </div>
+
+      <div class="wide">
+        <section class="card" id="goals-card">
+          <h2>Goals</h2>
+          <ul class="goals" id="goal-list"></ul>
+          <p class="muted empty" id="goals-empty">No goals yet.</p>
+          <details>
+            <summary>New goal</summary>
+            <form id="goal-form" class="goal-form">
+              <label>Name <input name="name" required></label>
+              <label>Kind
+                <select name="goalType" id="goal-type">
+                  <option value="hard">Hard: a number from logs</option>
+                  <option value="soft">Soft: a status you set</option>
+                </select>
+              </label>
+              <div class="hard-fields">
+                <label>Activity <select name="activityTypeId" id="goal-activity"></select></label>
+                <label>Target <input type="number" name="targetValue" step="any" min="0"></label>
+                <label>Per
+                  <select name="period">
+                    <option value="day">day</option>
+                    <option value="week">week</option>
+                  </select>
+                </label>
+              </div>
+              <button type="submit">Create goal</button>
+            </form>
+          </details>
+        </section>
+
+        <section class="card retro" id="daily-card" data-kind="daily">
+          <h2>Daily retro <span class="muted period-label"></span> <span class="phase"></span></h2>
+          <textarea id="daily-body" rows="7" placeholder="How did today go?"></textarea>
+          <div class="row">
+            <button type="button" class="save">Save</button>
+            <button type="button" class="secondary" id="dictate">Dictate</button>
+          </div>
+          <div class="judgment" hidden>
+            <h3>Judgment</h3>
+            <p class="judgment-text"></p>
+            <h3>Next focus</h3>
+            <p class="focus-text"></p>
+          </div>
+        </section>
+
+        <section class="card retro" id="weekly-card" data-kind="weekly">
+          <h2>Weekly retro <span class="muted period-label"></span> <span class="phase"></span></h2>
+          <textarea id="weekly-body" rows="9" placeholder="How did this week go?"></textarea>
+          <div class="row">
+            <button type="button" class="save">Save</button>
+          </div>
+          <div class="judgment" hidden>
+            <h3>Judgment</h3>
+            <p class="judgment-text"></p>
+            <h3>Next focus</h3>
+            <p class="focus-text"></p>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</body>
+</html>
